@@ -14,6 +14,7 @@ export class ListaProductoComponent implements OnInit {
   constructor(private productoService: ProductoService) { }
 
   ngOnInit(): void {
+    this.cargarProductos();
   }
 
   cargarProductos(): void{
@@ -25,6 +26,10 @@ export class ListaProductoComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  borrar(id?: number){
+    alert('borrar el ' + id);
   }
 
 }
