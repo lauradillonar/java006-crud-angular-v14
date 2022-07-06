@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ProductoService } from './../../service/producto.service';
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
@@ -10,13 +11,14 @@ import { Producto } from 'src/app/models/producto';
 export class ListaProductoComponent implements OnInit {
 
   productos: Producto[] = [];
-
-  constructor(private productoService: ProductoService) { }
+  constructor(
+    private productoService: ProductoService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.cargarProductos();
   }
-
   cargarProductos(): void{
     this.productoService.lista().subscribe(
       data => {
@@ -27,9 +29,23 @@ export class ListaProductoComponent implements OnInit {
       }
     );
   }
-
   borrar(id?: number){
-    alert('borrar el ' + id);
+    if (id != undefined){
+    this.productoService.delete(id).subscribe(
+      data => {
+        this.toastr.success('Producto Eliminado','OK', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center'
+        });
+        this.cargarProductos();
+      },
+      err => {
+        this.toastr.error(err.error.mensaje,'Fail', {
+          timeOut: 3000,
+          positionClass: 'toast-top-center'
+        });
+      }
+    );
+    }
   }
-
 }
