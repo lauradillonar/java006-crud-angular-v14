@@ -1,3 +1,4 @@
+import { EditarProductoComponent } from './producto/editar-producto/editar-producto.component';
 import { NuevoProductoComponent } from './producto/nuevo-producto/nuevo-producto.component';
 import { DetalleProductoComponent } from './producto/detalle-producto/detalle-producto.component';
 import { ListaProductoComponent } from './producto/lista-producto/lista-producto.component';
@@ -8,6 +9,7 @@ const routes: Routes = [
   {path: '', component: ListaProductoComponent},
   {path: 'detalle/:id', component: DetalleProductoComponent},
   {path: 'nuevo', component: NuevoProductoComponent},
+  {path: 'editar/:id', component: EditarProductoComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
